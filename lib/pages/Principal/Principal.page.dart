@@ -101,8 +101,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
 
   Widget Options() {
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 63.0),
-        child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 63.0, ),
+        /*child: Container(
           height: 253,
           child: GridView.count(
             crossAxisCount: 2,
@@ -121,7 +121,40 @@ class _PrincipalPageState extends State<PrincipalPage> {
               Option(SvgState.svgCuatro, "Transaccion", () {}),
             ],
           ),
-        ));
+        )*/
+      child: Container(
+        //flex: 1,
+        height: 253,
+        width: 270,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+              Option(SvgState.svgUno, "Cuenta y tarjeta", () {
+                Navigator.pushNamed(context, '/principal/cuenta');
+              }),
+              Option(SvgState.svgDos, "Historial de pagos", () {
+                Navigator.pushNamed(context, '/historial');
+              }),
+              ],),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+              children: [
+              
+              Option(SvgState.svgTres, "Pagar Servicios", () {
+                Navigator.pushNamed(context, '/principal/crear-credito');
+              }),
+              Option(SvgState.svgCuatro, "Transaccion", () {
+                Navigator.pushNamed(context, '/solicitar', arguments: {"title":"Solicitud exitosa","subTitle":"Has enviado correctamente tu solicitud"});
+              }),],),            
+
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -157,15 +190,15 @@ class _PrincipalPageState extends State<PrincipalPage> {
                         color: Colors.white),
                     child: Padding(
                       padding: EdgeInsets.only(
-                          right: 24.0, left: 24.0, top: 24.0, bottom: 63),
+                          right: 17.0, left: 17.0, top: 24.0, bottom: 63),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Cards(),
-                          Options(),
                           const SizedBox(
-                            height: 91.0,
-                          )
+                            height: 40.0,),
+                          Options()
+                          
 
                           //Option(svgUno, "Cuenta y tarjeta", (){})
                         ],

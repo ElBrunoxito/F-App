@@ -1,40 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:tf/config/config.dart';
-//import 'package:flutter_combo_box/flutter_combo_box.dart';
-
+import 'package:dropdown_button2/dropdown_button2.dart';
 
 class ComboBoxInput extends StatefulWidget {
   final TextEditingController controller;
+  final String hintText;
 
-  const ComboBoxInput({
-    super.key,
-    required this.controller,
-  });
+  const ComboBoxInput(
+      {super.key, required this.controller, required this.hintText});
 
   @override
   State<ComboBoxInput> createState() => _ComboBoxInputState();
 }
 
 class _ComboBoxInputState extends State<ComboBoxInput> {
+  final List<String> items = Config.tasasDeInteres;
+  String? selectedValue;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 44.0,
-        width: 327.0,
-        child:
-            /*TextField(
-        controller: controller,
-        keyboardType: textInputType,
-        style: TextStyle(
-            fontFamily: "PoppinsMedium",
-            fontSize: 14.0,
-            color: Config.subTitleColor),
+      height: 44.0,
+      width: 327.0,
+      child: DropdownButtonFormField2<String>(
         decoration: InputDecoration(
-          hintText: hintText,
-
+          hintText: widget.hintText,
           hintStyle: TextStyle(color: Config.hintTextField),
           contentPadding:
-              EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
@@ -46,84 +39,40 @@ class _ComboBoxInputState extends State<ComboBoxInput> {
             borderSide: BorderSide(color: Config.borderTextField),
             borderRadius: BorderRadius.circular(15.0),
           ),
-
-          ///Ver la contraseña
-          ///NODE FOCUS
         ),
-      ),*/
-           /* DropdownMenu(
-          initialSelection: Config.tasasDeInteres.first,
-          onSelected: (String? value) {
-            setState(() {});
-          },
-          
-          controller: widget.controller,
-          dropdownMenuEntries: Config.tasasDeInteres
-              .map<DropdownMenuEntry<String>>((String value) {
-            return DropdownMenuEntry<String>(value: value, label: value);
-          }).toList(),  
-
-        
-        )*/
-        Center(child: Text("xd"),)
-
-
-
-        
-        /*DropdownButtonHideUnderline(
-          child: DropdownButton(
-            isExpanded: true,
-            hint: Text(
-              'Selecciona una opción',
-              style: TextStyle(
-                fontSize: 14,
-                color: Config.hintTextField,
-              ),
-            ),
-            items: Config.tasasDeInteres
-                .map((item) => DropdownMenuItem<String>(
-                      value: item,
-                      child: Text(
-                        item,
-                        style: const TextStyle(
-                          fontSize: 14,
-                        ),
-                      ),
-                    ))
-                .toList(),
-            value: selectedValue,
-            onChanged: (value) {
-              setState(() {
-                selectedValue = value as String;
-              });
-            },          
-            buttonStyleDat: ButtonStyleData(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              height: 50,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
-                border: Border.all(
-                  color: Config.borderTextField,
-                ),
-              ),
-            ),
-            dropdownStyleData: DropdownStyleData(
-              maxHeight: 200,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
-                border: Border.all(
-                  color: Config.borderTextField,
-                ),
-                color: Colors.white, // Color de fondo del menú desplegable
-              ),
-              offset: const Offset(0, 8),
-            ),
-            menuItemStyleData: MenuItemStyleData(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-            ),
+        items: items
+            .map((item) => DropdownMenuItem<String>(
+                  value: item,
+                  child: Text(
+                    item,
+                    style: TextStyle(
+                        fontFamily: "PoppinsMedium",
+                        fontSize: 14.0,
+                        color: Config.subTitleColor),
+                  ),
+                ))
+            .toList(),
+        validator: (value) {
+          if (value == null) {
+            return 'Please select gender.';
+          }
+          return null;
+        },
+        onChanged: (value) {
+          widget.controller.text = value.toString();
+        },
+        onSaved: (value) {
+          selectedValue = value.toString();
+          print(value);
+        },
+        iconStyleData: const IconStyleData(
+          icon: Icon(
+            Icons.arrow_drop_down,
+            color: Colors.black45,
           ),
+          iconSize: 24,
         ),
-      */
-        );
+      ),
+    );
   }
 }

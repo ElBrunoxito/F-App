@@ -5,8 +5,10 @@ import 'package:tf/config/config.dart';
 class CheckBoxTextNormal extends StatefulWidget {
   final EdgeInsets padding;
   final Function onChanged;
+  final String text;
+
   const CheckBoxTextNormal(
-      {super.key, required this.padding, required this.onChanged});
+      {super.key, required this.padding, required this.onChanged,required this.text});
 
   @override
   State<CheckBoxTextNormal> createState() => _CheckBoxTextNormalState();
@@ -60,8 +62,10 @@ class _CheckBoxTextNormalState extends State<CheckBoxTextNormal> {
               ),
             ),
           ),
-          const SizedBox(width: 10.0,),
-          const Expanded(child: Text("Tengo un negocio"))
+          const SizedBox(
+            width: 10.0,
+          ),
+          Expanded(child: Text(widget.text))
         ],
       ),
     );

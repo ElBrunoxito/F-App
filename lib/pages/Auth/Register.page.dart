@@ -94,6 +94,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               height: 16.0,
                             ),
                             CheckBoxTextNormal(
+                              text:"Tengo un negocio",
                               padding: EdgeInsets.symmetric(horizontal: 30.0),
                               onChanged: () {
                                 //Cambiar los placeholders

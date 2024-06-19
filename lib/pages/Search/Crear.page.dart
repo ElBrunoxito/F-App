@@ -105,7 +105,7 @@ class _CrearPageState extends State<CrearPage> {
           ),
           MyButton(
             onPressed: () {
-      
+              
             },
             texto: "Confirmar",
             camposRellenos: prosigue,

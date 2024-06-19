@@ -3,7 +3,13 @@ import 'package:tf/widgets/body/BodySuccess.widget.dart';
 import 'package:tf/widgets/head/HeadWidget.dart';
 
 class SolicitarPage extends StatefulWidget {
-  const SolicitarPage({super.key});
+  final String title;
+  final String subtitle;
+  const SolicitarPage({
+    super.key,
+    required this.title,
+    required this.subtitle
+    });
 
   @override
   State<SolicitarPage> createState() => _SolicitarPageState();
@@ -23,14 +29,13 @@ class _SolicitarPageState extends State<SolicitarPage> {
                   onPressed: () {
                     Navigator.pop(context);
                   })),
-          const Expanded(
+          Expanded(
             child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 49.0),
-                child: BodySuccessWidget(bodyText: "Has enviado correctamente tu solicitud")
-          ),
-        )
+                child: BodySuccessWidget(
+                    titleText: widget.title,
+                    bodyText: widget.subtitle )),
+          )
         ]));
   }
-
-
 }

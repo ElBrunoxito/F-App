@@ -9,7 +9,7 @@ import 'package:tf/pages/PrincipalManage.page.dart';
 import 'package:tf/pages/Auth/Register.page.dart';
 import 'package:tf/pages/Search/Crear.page.dart';
 import 'package:tf/pages/Search/Search.page.dart';
-import 'package:tf/pages/Search/Solicitar.page.dart';
+import 'package:tf/pages/Solicitar.page.dart';
 
 void main() {
   /*ChangeNotifierProvider(
@@ -33,15 +33,27 @@ class MyApp extends StatelessWidget {
       ),
       onGenerateRoute: (settings) {
         if (settings.name == '/search/crear') {
-          // Aquí puedes obtener el ID del settings.arguments si lo necesitas
-          //final id = (settings.arguments as String).split('/')[1];
           final args = settings.arguments as Map<String, dynamic>;
-
           final id = args["id"];
           final isBusiness = args["isBusiness"];
           // Retornar la pantalla que corresponde a '/search/crear'
           return MaterialPageRoute(
-            builder: (_) => CrearPage(id: id,isBusiness:isBusiness ,), // Aquí deberías retornar tu widget apropiado
+            builder: (_) => CrearPage(
+              id: id,
+              isBusiness: isBusiness,
+            ), // Aquí deberías retornar tu widget apropiado
+            settings: settings,
+          );
+        }
+        if (settings.name == '/solicitar') {
+          final args = settings.arguments as Map<String, dynamic>;
+          final title = args["title"];
+          final subTitle = args["subTitle"];
+          return MaterialPageRoute(
+            builder: (_) => SolicitarPage(
+              title: title,
+              subtitle: subTitle,
+            ), // Aquí deberías retornar tu widget apropiado
             settings: settings,
           );
         }
@@ -57,10 +69,9 @@ class MyApp extends StatelessWidget {
         '/principal/cuenta': (context) => CuentaTarjetaPage(),
 
         '/search': (context) => SearchPage(),
-        '/search/solicitar' : (context)=> SolicitarPage(),
-        '/historial':(context) => HistorialPage(),
+        '/historial': (context) => HistorialPage(),
 
-        'principal/crear-credito':(context) => CrearCreditoPage()
+        '/principal/crear-credito': (context) => CrearCreditoPage()
         //'/search/crear/:id':(context) => CrearPage()
       },
       //initialRoute: '/login',
@@ -68,6 +79,7 @@ class MyApp extends StatelessWidget {
       //home: PrincipalManagePage(),
       //initialRoute: '/search/solicitar',
       initialRoute: '/principal',
+      //home: SolicitarPage(title: "Solicitud exitosa",subtitle: "Has enviado correctamente tu solicitud",),
     );
     //return MySample();
   }

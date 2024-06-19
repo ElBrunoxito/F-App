@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 import 'package:tf/config/config.dart';
 import 'package:tf/pages/Principal/Historial.page.dart';
 import 'package:tf/pages/Principal/Principal.page.dart';
